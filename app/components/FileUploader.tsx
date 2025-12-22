@@ -1,11 +1,15 @@
 import React, { useState, useCallback} from 'react'
 import {useDropzone} from 'react-dropzone'
 
-const FileUploader = () => {
+interface FileUploaderProps {
+    onFileSelect?: (file: File | null) => void;
+}
+
+const FileUploader = ({ onFileSelect}: FileUploaderProps ) => {
     const [file, setFile] = useState();
 
-    const onDrop = useCallback(acceptedFiles => {
-    // Do something with the files
+    const onDrop = useCallback( (acceptedFiles: File[]) => {
+        const file = acceptedFiles[0] || null;
   }, [])
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
@@ -30,7 +34,7 @@ const FileUploader = () => {
                                 Click to upload
                             </span> or drag and drop
                         </p>
-                        <p className='text-lg text-gray-500'>PDF (max 20 MB)</p>
+                        <p className='text-lg text-gray-500'>PDF (max 20)</p>
                     </div>
                 )}
             </div>
