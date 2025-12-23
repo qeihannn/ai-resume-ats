@@ -7,6 +7,11 @@ import { convertPdfToImage } from "~/lib/pdf2img"
 import { generateUUID } from "~/lib/utils"
 import {prepareInstructions} from "../../constants";
 
+export const meta = () => ([
+    { title: 'Resumind | Upload' },
+    { name: 'description', content: 'Analyze your resume for ATS compatibility'}
+])
+
 const upload = () => {
   const {auth, isLoading, fs, ai, kv} = usePuterStore();
   const navigate = useNavigate();
@@ -61,6 +66,7 @@ const upload = () => {
     setStatusText('Analysis complete, redirecting...');
 
     console.log(data);
+    navigate(`/resume/${uuid}`);
   }
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
